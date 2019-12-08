@@ -1,0 +1,30 @@
+{
+  "name": "templateengine",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yugmani/templateEngine.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yugmani/templateEngine/issues"
+  },
+  "homepage": "https://github.com/yugmani/templateEngine#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "expresss": "0.0.0",
+    "hbs": "^4.0.6",
+    "i": "^0.3.6",
+    "inquirer": "^7.0.0"
+  }
+}

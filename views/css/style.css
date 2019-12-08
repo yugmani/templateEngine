@@ -1,0 +1,52 @@
+body {
+    /* max-width: 650px; */
+    height:100%;
+    margin:0;
+    padding:0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 20px;
+}
+
+.container {
+margin:0 auto;
+width:50%;
+height:100%;
+}
+
+header {
+    margin-bottom:48px;
+    
+    border-bottom:1px solid gray;
+}
+
+header, footer {
+    width:100%;
+    margin:0 auto;
+    margin-top:20px;
+    padding:10px;
+    text-align: center;
+    text-transform: uppercase;
+    width:100%;
+    /* background-color: rgb(156, 156, 148); */
+    
+}
+
+footer {
+    /* background-color:rgb(143, 133, 133); */
+    margin-top:50px;
+    border-top:1px solid gray;
+}
+
+header img {
+    width:30px;
+    height:30px;
+}
+
+.name, .id, .email, .office {
+width:100%;
+margin:0 auto;
+margin-bottom:10px;
+margin-top:10px;
+padding:10px;
+background-color:whitesmoke;
+}
