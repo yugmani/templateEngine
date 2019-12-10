@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Team Profile</title>
+        <!-- Latest compiled and minified CSS & JS -->
+        <link rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <link rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://code.jquery.com/jquery.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href = './css/style.css'>
+    </head>
+
+<body>
+
+        <div class="container">
+            <header>
+                <h1>TEAM PROFILE GENERATOR</h1>
+                <div class="pages">
+                        <!-- <a href="main.html"><img src="./images/Circular_House-512.png">Home</a> -->
+                        <a href="./manager.html"><img src="./images/ceo-icon.jpg">Manager</a>
+                        <a href="./engineer.html"><img src="./images/61-512.png">Engineer</a>
+                        <a href="./intern.html"><img src="./images/40716-200.png">Intern</a>   
+                </div>
+            </header>
+           
+            <div id="subHeader">
+                    <button id="viewAll" type="button" class="btn btn-lg btn-light"><a href="viewall.html">View ALL Employees</a></button>
+                    <button id="addNew" type="button" class="btn btn-lg btn-light"><a href="addNew.html">Add NEW Employee</a></button>
+                    <div id="search">
+                            <input id="searchInput" type="text" name="username" placeholder="Search id">
+                            <input type="image" id="inputImage" src="./images/searchicon.png">
+                    </div> 
+            </div>
+
+            <div class="card">
+                    <div class="card-header">
+                            <h3><strong>Employee Profile</strong></h3>
+                    </div>
+                    <div class="card-body">
+                            <h2 id="name">Annapurna</h2>
+                            <div id="stats">
+                                <h3><strong>ID:</strong> <span id="id">101</span></h3>
+                                <h3><strong>Designation:</strong> <span id="role">Engineer</span></h3>
+                                <h3><strong>Email:</strong> <span id="email">someone@ok.com</span></h3>
+                                <h3> <span id="info">Office: 101</span></h3>
+                                <!-- <strong>Info:</strong> -->
+                            </div>
+                    </div>
+            </div>
+       
+            
+        </div>
+        <footer class="fixed-bottom">Created by YM</footer>
+        <script>
+
+$("#inputImage").on("click", function() {
+      var searchedId = $("#searchInput").val().trim();
+
+      // Using a RegEx Pattern to remove spaces from searchedCharacter
+     
+      searchedId = searchedId.replace(/\s+/g, "").toLowerCase();
+
+      $.get("/api/employees/" + searchedId, function(data) {
+        // console.log(data);
+        if (data) {
+          $("#stats").show();
+          $("#name").text(data.name);
+          $('#id').text(data.id)
+          $("#role").text(data.designation);
+          $("#email").text(data.email);
+          if (data.designation === "manager"){
+            $("#info").html("<h3><strong>Office:</strong>"+data.office);
+          } else if (data.designation === "engineer"){
+            $("#info").html("<h3><strong>Github:</strong>"+data.github);
+          } else {
+            $("#info").html("<h3><strong>School:</strong>"+data.school);
+          }
+         
+        } else {
+          $("#name").text(
+            "Your id was not found.");
+          $("#stats").hide();
+        }
+      });
+    });
+
+        </script>
+
+</body>
+</html>

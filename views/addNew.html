@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Team Profile</title>
+        
+        <link rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <link rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://code.jquery.com/jquery.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href = './css/style.css'>
+    </head>
+
+<body>
+
+        <div class="container">
+            <header>
+                <h1>TEAM PROFILE GENERATOR</h1>
+                <div class="pages">
+                        <a href="main.html"><img src="./images/Circular_House-512.png">Home</a>
+                        <a href="manager.html"><img src="./images/ceo-icon.jpg">Manager</a>
+                        <a href="engineer.html"><img src="./images/61-512.png">Engineer</a>
+                        <a href="intern.html"><img src="./images/40716-200.png">Intern</a>   
+                </div>
+            </header>
+           
+            <div class="row">
+            
+                  <div class="col-12">
+            
+                    <div class="card">
+                      <div class="card-header">
+                        <h3><strong>Add Employees</strong></h3>
+                      </div>
+                      <div class="card-body">
+                        <form method="POST" role="form">
+
+                          <div class="form-group">
+                                <label for="id">ID</label>
+                                <input type="text" class="form-control" id="id">
+                          </div>
+            
+                          <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name">
+                          </div>
+            
+                          <div class="form-group">
+                            <label for="designation">Designation</label>
+                            <input type="text" class="form-control" id="designation">
+                          </div>
+            
+                          
+            
+                          <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="text" class="form-control" id="email">
+                          </div>
+
+                          <div class="form-group">
+                              <label for="office">Office/Github/School</label>
+                              <input type="text" class="form-control" id="office">
+                            </div>
+            
+
+
+                        </form>
+                        <br>
+                        <div class="text-center">
+                          <button type="submit" class="btn btn-info btn-lg btn-block" id="add"><span class="fa"></span>Submit</button>
+                        </div>
+                      </div>
+                    </div>
+            
+                  </div>
+                </div>
+              </div>
+            
+<script type="text/javascript">
+                
+    $("#add").on("click", function(event) {
+          event.preventDefault();
+                  var info = $($("#office").val().trim());
+                  var designation = $("#designation").val().trim();
+
+                  if (designation === "manager"){
+                      var newEmployee = {
+                          id: $("#id").val().trim(),
+                          name: $("#name").val().trim(),
+                          designation: $("#designation").val().trim(),
+                          email: $("#email").val().trim(),
+                          office:$("#office").val().trim()
+                          } 
+                  } else if (designation === "engineer"){
+                    var newEmployee = {
+                      id: $("#id").val().trim(),
+                      name: $("#name").val().trim(),
+                      designation: $("#designation").val().trim(),
+                      email: $("#email").val().trim(),
+                      github:$("#office").val().trim()
+                  }
+                  } else if (designation === "engineer"){
+                
+                      var newEmployee = {
+                            id: $("#id").val().trim(),
+                            name: $("#name").val().trim(),
+                            designation: $("#designation").val().trim(),
+                            email: $("#email").val().trim(),
+                            
+                            school:$("#office").val().trim()
+                      }
+                  }
+                 
+                  $.post("/api/employees", newEmployee)
+                    .then(function(data) {
+                      console.log("addNew.html", data);
+                      alert("Adding new employee...");
+                    });
+                  });
+  </script>
+
+</body>
+</html>

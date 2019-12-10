@@ -1,40 +1,122 @@
-const path = require('path')
-const express = require ('express')
+// Dependencies
 
-const app = express()
+var express = require("express");
+var path = require("path");
+
+// Sets up the Express App
+
+var app = express();
+var PORT = 3000;
+
+// Sets up the Express app to handle data parsing
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+const viewPath = path.join(__dirname, './views');
+app.use(express.static(viewPath));
+
+// =============================================================
+var employees = [
+  
+        {
+            id:"01",
+            designation: "manager",
+            name: "zach",
+            email: "zach@one.com",
+            office: 100
+        },
+  
+        {
+            id: "02",
+            designation: "engineer",
+            name: "lulu",
+            email: "lulu@two.com",
+            github: "github.com/lulu"
+        },
+            
+        {
+            id: "03",
+            designation: "engineer",
+            name: "Austen",
+            email: "austen@two.com",
+            github: "github.com/austen"
+            },
+  
+
+        { 
+            id: "04",
+            designation: "intern",
+            name: "Manasalu",
+            email: "manasalu@three.com",
+            school: "ucla"
+        },
+ 
+    ];
+
+// Routes
+// =============================================================
+
+// Basic route that sends the user first to the AJAX Page
+app.get("/", function(req, res) {
+  res.sendFile(path.join(__dirname, "/views/main.html"));
+});
+
+app.get("/manager", function(req, res) {
+  res.sendFile(path.join(__dirname, "/views/manager.html"));
+});
 
 
-const pathLocal = path.join(__dirname, 'templates')
+app.get("/engineer", function(req, res) {
+    res.sendFile(path.join(__dirname, "/views/engineer.html"));
+  });
 
-app.use(express.static(pathLocal))
-
-app.set('view engine', 'hbs')
-
-engineer = {
-    name: "Jasmine",
-    age: 15
-}
+app.get("/intern", function(req, res) {
+    res.sendFile(path.join(__dirname, "./views/intern.html"));
+  });
 
 
+// Displays all employees
+app.get("/api/employees", function(req, res) {
+    return res.json(employees);
+  });
 
-app.get('', (req, res) =>{
+  //displays single employee
+app.get("/api/employees/:employee", function(req, res) {
+  var select = req.params.employee;
 
-    res.render('index.hbs', {
-        title:"manager",
-        name:"Catherine"
-    })
-})
+  console.log(select);
 
-app.get('/help', (req, res)=>{
+  for (var i = 0; i < employees.length; i++) {
+    if (select === employees[i].id) {
+      return res.json(employees[i]);
+    }
+  }
 
-    res.send(engineer)
-})
+  return res.json(false);
+});
 
-app.get('/weather', (req, res)=>{
-    res.send('Your Weatehr')
-})
+ 
+
+// Create New Employee - takes in JSON input
+app.post("/api/employees", function(req, res) {
+  // req.body hosts is equal to the JSON post sent from the user
+  // This works because of our body parsing middleware
+  var newEmployee = req.body;
+
+  // Using a RegEx Pattern to remove spaces from newEmployee
+  
+  newEmployee.id = newEmployee.id.replace(/\s+/g, "").toLowerCase();
+
+  console.log(newEmployee);
+
+  employees.push(newEmployee);
+
+  res.json(newEmployee);
+});
 
 
-app.listen(3000, ()=>{
-    console.log('server is listening on port:3000.')
-})
+
+// Starts the server to begin listening
+// =============================================================
+app.listen(PORT, function() {
+  console.log("App listening on PORT " + PORT);
+});

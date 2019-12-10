@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>MANAGER</title>
+        <!-- Latest compiled and minified CSS & JS -->
+        <link rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <link rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://code.jquery.com/jquery.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href = './css/style.css'>
+    </head>
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>Team Profile</title>
+            <!-- Latest compiled and minified CSS & JS -->
+            <link rel="stylesheet"
+                href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+            <link rel="stylesheet"
+                href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <script src="https://code.jquery.com/jquery.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+            <link rel="stylesheet" type="text/css" href = './css/style.css'>
+        </head>
+    
+    <body>
+    
+            <div class="container">
+                <header>
+                    <h1>TEAM PROFILE GENERATOR</h1>
+                    <div class="pages">
+                            <a href="main.html"><img src="./images/Circular_House-512.png">Home</a>
+                            <a href="manager.html"><img src="./images/ceo-icon.jpg">Manager</a>
+                            <!-- <a href="engineer.html"><img src="./images/61-512.png">Engineer</a> -->
+                            <a href="intern.html"><img src="./images/40716-200.png">Intern</a>   
+                    </div>
+                </header>
+               
+            </div>
+            <footer class="fixed-bottom">Created by YM</footer>
+            <script>
+  
+
+  $.get("/api/employees/", function(data) {
+        console.log(data);
+        if (data) {
+            let r = 1;
+            let divRow = $("<div>");
+            divRow.attr("class", "row");
+            $(".container").append(divRow);
+    
+    for (let i=0; i<data.length; i++){
+
+        if (data[i].designation === "engineer"){
+            let divCard = $("<div>");
+            divCard.attr("class", "eachCard")
+            $(".row").append(divCard);
+            let divHeader = $("<div>");
+            divHeader.attr("class", "cardheader");
+            divCard.append(divHeader);
+            divHeader.html("<h3><strong>Employee Profile</strong></h3>");
+
+            let cardBody = $("<div>")
+            cardBody.attr("class", "card-body");
+            divCard.append(cardBody);
+            let newH = $("<h2>")
+            newH.attr("id", "name");
+            newH.text(data[i].name);
+            cardBody.append(newH);
+
+            let newH1 = $("<h3>");
+            newH1.html("<strong>ID:</strong>"+data[i].id);
+            cardBody.append(newH1);
+            let newH2 = $("<h3>");
+            newH2.html("<strong>Designation: </strong>"+data[i].designation);
+            cardBody.append(newH2);
+            let newH3 = $("<h3>");
+            newH3.html("<strong>Email: </strong>"+data[i].email);
+            cardBody.append(newH3);
+           
+            let newH4 = $("<h3>");
+            newH4.html("<strong>github: </strong>"+data[i].github);
+            cardBody.append(newH4);
+
+                        if ( r % 3 === 0 ){
+                            let divRow = $("<div>");
+                            divRow.attr("class", "row");
+                            $(".container").append(divRow);
+                        }
+
+            r = r + 1;
+        
+            }
+
+        }
+        }
+    });
+            </script>
+    
+    </body>
+    </html>
