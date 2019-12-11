@@ -56,12 +56,12 @@
             
                           <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="text" class="form-control" id="email">
+                            <input type="email" class="form-control" id="email">
                           </div>
 
                           <div class="form-group">
-                              <label for="office">Office/Github/School</label>
-                              <input type="text" class="form-control" id="office">
+                              <label for="office">Office/Github username/School</label>
+                              <input class="form-control" id="office" required aria-required="true">
                             </div>
             
 
@@ -84,24 +84,39 @@
           event.preventDefault();
                   var info = $($("#office").val().trim());
                   var designation = $("#designation").val().trim();
-
+                  // var officeInput = $("#office");
+                 var newInput = $("#office");
+                  
                   if (designation === "manager"){
+
+                    newInput.attr("type", "text");
+                    newInput.attr("placeholder", "Required [office no.]");
+
                       var newEmployee = {
                           id: $("#id").val().trim(),
                           name: $("#name").val().trim(),
                           designation: $("#designation").val().trim(),
                           email: $("#email").val().trim(),
                           office:$("#office").val().trim()
-                          } 
+                          };
                   } else if (designation === "engineer"){
+                    //let newInput = $("#office");
+                    newInput.attr("type", "url");
+                    newInput.attr("name", "url");
+                    newInput.attr("pattern", "^(https?://)?");
+                    newInput.attr("placeholder", "Required [github username]");
+
                     var newEmployee = {
                       id: $("#id").val().trim(),
                       name: $("#name").val().trim(),
                       designation: $("#designation").val().trim(),
                       email: $("#email").val().trim(),
                       github:$("#office").val().trim()
-                  }
-                  } else if (designation === "engineer"){
+                  };
+                  } else if (designation === "intern"){
+                    //let newInput = $("#office");
+                    newInput.attr("type", "text");
+                    newInput.attr("placeholder", "Required [School]")
                 
                       var newEmployee = {
                             id: $("#id").val().trim(),
@@ -110,7 +125,7 @@
                             email: $("#email").val().trim(),
                             
                             school:$("#office").val().trim()
-                      }
+                      };
                   }
                  
                   $.post("/api/employees", newEmployee)

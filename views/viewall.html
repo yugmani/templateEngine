@@ -72,9 +72,9 @@
             cardBody.append(newH3);
            
             let newH4 = $("<h3>");
-                if (data.designation === "manager"){
+                if (data[i].designation === "manager"){
                 newH4.html("<strong>Office: </strong>"+data[i].office);
-                } else if (data.designation === "engineer"){
+                } else if (data[i].designation === "engineer"){
                     newH4.html("<strong>Github: </strong>"+data[i].github);
                 } else {
                     newH4.html("<strong>School: </strong>"+data[i].school);

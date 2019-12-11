@@ -30,7 +30,7 @@ var employees = [
             designation: "engineer",
             name: "lulu",
             email: "lulu@two.com",
-            github: "github.com/lulu"
+            github: "https://github.com/lulu"
         },
             
         {
@@ -38,7 +38,7 @@ var employees = [
             designation: "engineer",
             name: "Austen",
             email: "austen@two.com",
-            github: "github.com/austen"
+            github: "https://github.com/austen"
             },
   
 
@@ -104,7 +104,7 @@ app.post("/api/employees", function(req, res) {
 
   // Using a RegEx Pattern to remove spaces from newEmployee
   
-  newEmployee.id = newEmployee.id.replace(/\s+/g, "").toLowerCase();
+  //newEmployee.name = newEmployee.name.replace(/\s+/g, "").toLowerCase();
 
   console.log(newEmployee);
 
